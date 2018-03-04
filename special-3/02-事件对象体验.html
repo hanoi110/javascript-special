@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+    <script>
+        //点击页面的任何部分
+         document.onclick = function (event) {
+             //兼容写法
+             event = event || window.event;
+//            console.log(event);
+            console.log(event);
+            console.log(event.timeStamp);
+            console.log(event.bubbles);
+            console.log(event.button);
+            console.log(event.pageX);
+            console.log(event.pageY);
+            console.log(event.screenX);
+            console.log(event.screenY);
+            console.log(event.target);
+            console.log(event.type);
+            console.log(event.clientX);
+            console.log(event.clientY);
+
+         }
+
+
+
+    </script>
+</body>
+</html>

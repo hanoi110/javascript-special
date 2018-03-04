@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1 {
+            width: 300px;
+            height: 300px;
+            padding: 100px;
+            margin: 100px;
+            position: relative;
+            border: 100px solid #000;
+            background-color: pink;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">
+    <div class="box3">
+        <div class="box2" style="left: 10px"></div>
+    </div>
+</div>
+
+<script>
+
+    var box2 = document.getElementsByClassName("box2")[0];
+
+    //offsetTop和offsetLeft
+    console.log(box2.offsetLeft);
+    console.log(box2.style.left);
+
+//    一、最大区别在于offsetLeft可以返回没有定位盒子的距离左侧的位置。
+    //如果父系盒子中都没有定位，以body为准。
+    //style.left只能获取行内式，如果没有返回“”;
+
+//    二、offsetTop 返回的是数字，而 style.top 返回的是字符串，除了数字外还带有单位：px。
+    //div.offsetLeft = 100;    div.style.left = "100px";
+
+//    三、offsetTop 只读，而 style.top 可读写。（只读是获取值，可写是赋值）
+    //style.left和style.top可以赋值
+    //offsetLeft和offsetTop只能获取值
+
+//    四、如果没有给 HTML 元素指定过 top 样式，则style.top 返回的是空字符串。
+    //style.left只能获取行内式，如果没有返回“”;
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>demo</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        img {
+            position: absolute;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+    </style>
+    <script src="animate.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            // 需求：将图片移动到鼠标所点击的地方
+            // 思路：获取鼠标所在页面的位置，利用缓动原理移动图片
+            // 步骤：
+            // 1.老三步
+            // 2.获取鼠标位置
+            // 3.缓动原理移动图片
+
+            // 1.老三步
+        //     var img = document.getElementsByTagName("img")[0];
+        // var timer = null;
+        // var targetx = 0;var targety = 0;
+        // var leaderx = 0;var leadery = 0;
+
+        // document.onclick = function (event) {
+
+            // event = event || window.event;
+
+            // var pagey = event.pageY || scroll().top + event.clientY;
+            // var pagex = event.pageX || scroll().left + event.clientX;
+               var img = document.getElementsByTagName("img")[0];
+               var timer = null;
+               var targetx = 0; var leaderx = 0;
+               var targety = 0; var leadery = 0;
+               document.onclick = function(event){
+               // //  // 2.获取鼠标位置
+                  event = event || window.event;
+                   var pagex = event.pageX || scroll().left + event.clientX;
+           var pagey = event.pageY || scroll().top + event.clientY;
+               targetx = pagex - img.offsetWidth/2;
+              targety = pagey - img.offsetHeight/2;
+                // targetx = pagex-img.offsetWidth/2;
+                   clearInterval(timer);
+                    timer = setInterval(function () {
+                        //为盒子的位置获取值
+                        leaderx = img.offsetLeft;
+                        //获取步长
+                        var stepx = (targetx-leaderx)/10;
+                        //二次处理步长
+                        stepx = stepx>0?Math.ceil(stepx):Math.floor(stepx);
+                        leaderx = leaderx + stepx;
+                        //赋值
+                        img.style.left = leaderx + "px";
+                        leadery = img.offsetTop;
+                        var stepy = (targety-leadery)/10;
+                        stepy = stepy>0?Math.ceil(stepy):Math.floor(stepy);
+                        leadery = leadery +stepy;
+                        img.style.top = leadery + "px";
+
+      if(Math.abs(targety-img.offsetTop)<=Math.abs(stepy) && Math.abs(targetx-img.offsetLeft)<=Math.abs(stepx)){
+              img.style.top = targety + "px";
+                 img.style.left = targetx + "px";
+                 clearInterval(timer);
+            }
+                    },30)
+
+               }
+//                        var img = document.getElementsByTagName("img")[0];
+//         var timer = null;
+//         var targetx = 0;var targety = 0;
+//         var leaderx = 0;var leadery = 0;
+//         //给整个文档绑定点击事件获取鼠标的位置。
+//         document.onclick = function (event) {
+//             //新五步
+//             //兼容获取事件对象
+//             event = event || window.event;
+//             //鼠标在页面的位置 = 被卷去的部分+可视区域部分。
+//             var pagey = event.pageY || scroll().top + event.clientY;
+//             var pagex = event.pageX || scroll().left + event.clientX;
+
+//             //要用定时器，先清定时器
+// //            targety = pagey-img.offsetHeight/2;
+// //            targetx = pagex-img.offsetWidth/2;
+//             targety = pagey-30;
+//             targetx = pagex-50;
+//             clearInterval(timer);
+//             timer = setInterval(function () {
+//                 //为盒子的位置获取值
+//                 leaderx = img.offsetLeft;
+//                 //获取步长
+//                 var stepx = (targetx-leaderx)/10;
+//                 //二次处理步长
+//                 stepx = stepx>0?Math.ceil(stepx):Math.floor(stepx);
+//                 leaderx = leaderx + stepx;
+//                 //赋值
+//                 img.style.left = leaderx + "px";
+
+
+//                 //为盒子的位置获取值
+//                 leadery = img.offsetTop;
+//                 //获取步长
+//                 var stepy = (targety-leadery)/10;
+//                 //二次处理步长
+//                 stepy = stepy>0?Math.ceil(stepy):Math.floor(stepy);
+//                 leadery = leadery + stepy;
+//                 //赋值
+//                 img.style.top = leadery + "px";
+//                 //清定时器
+
+// //                if(Math.abs(targety-img.offsetTop)<=Math.abs(stepy) && Math.abs(targetx-img.offsetLeft)<=Math.abs(stepx)){
+// //                    img.style.top = targety + "px";
+// //                    img.style.left = targetx + "px";
+// //                    clearInterval(timer);
+// //                }
+//             },30);
+//         }
+
+
+//             // 3.缓动原理移动图片
+        }
+    </script>
+</head>
+<body>
+    <img src="img.jpg" style="width: 100px">
+</body>
+</html>

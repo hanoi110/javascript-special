@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1 {
+            margin: 0;
+            padding: 5px;
+            height: 200px;
+            background-color: #ddd;
+            position: relative;
+        }
+        button {
+            margin: 5px;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 400px;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">
+    <button>运动到200</button>
+    <button>运动到400</button>
+    <div class="box2"></div>
+</div>
+
+
+<script>
+
+    var btnArr = document.getElementsByTagName("button");
+    var box2 = document.getElementsByClassName("box2")[0];
+
+    var timer = null;
+
+    //绑定事件
+    btnArr[0].onclick = function () {
+        animate(200);
+    }
+
+    btnArr[1].onclick = function () {
+        animate(400);
+    }
+
+
+    function animate(target){
+        //BUG1：点击多次以后，越来越快：每次只能开一个定时器。（执行定时器前面，先清楚定时器）
+        //要用定时器，先清定时器。
+        clearInterval(timer);
+        //BUG2:无法返回。 原因就是步长不能为恒定值。
+        // 传递的目标值如果比当前值大，那么步长为+10；
+        // 传递的目标值如果比当前值小，那么步长为-10；
+        var speed = target>box2.offsetLeft ? 10:-10;
+        timer = setInterval(function () {
+            //BUG3:二次点击不停止问题。
+            //如果当前值===目标值，那么先判断之间的距离还有多少，如果小于步长，那么就别走了，马上清除定时器
+            var val = target - box2.offsetLeft;
+            //盒子自身的位置+步长
+            box2.style.left = box2.offsetLeft + speed + "px";
+            //如果停止盒子？清除定时器
+            if(Math.abs(val)<Math.abs(speed)){
+                box2.style.left = target+ "px";
+                clearInterval(timer);
+            }
+        },30);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script src="jquery1.0.0.1.js"></script>
+    <script>
+        //需求：浏览器每次更改大小，判断是否符合某一标准然后给背景上色。
+        //  // >960红色，大于640小于960蓝色，小于640绿色。
+        //步骤：
+        //1.老三步
+        //2.判断。
+        //3.上色
+
+        //1.老三步
+        window.onresize = fn;
+        //页面加载的时候直接执行一次函数，确定浏览器可视区域的宽，给背景上色
+        fn();
+
+        //封装成函数，然后指定的时候去调用和绑定函数名
+        function fn() {
+            //2.判断。
+            //3.上色
+            if(client().width>960){
+                document.body.style.backgroundColor = "red";
+            }else if(client().width>640){
+                document.body.style.backgroundColor = "blue";
+            }else{
+                document.body.style.backgroundColor = "green";
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

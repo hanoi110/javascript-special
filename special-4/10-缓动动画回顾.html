@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<button>运动到200</button>
+<button>运动到400</button>
+<div></div>
+
+
+<script>
+
+    var btnArr = document.getElementsByTagName("button");
+    var div = document.getElementsByTagName("div")[0];
+
+    btnArr[0].onclick = function () {
+        animate(div,200);
+    }
+
+    btnArr[1].onclick = function () {
+        animate(div,400);
+    }
+
+
+    //缺点：1.只能获取行内式，不能获取内嵌和外链样式。导致我们获取left值的时候,用offsetLeft模拟
+          //2.只能放入一个属性。（一个方法只能操作一个属性）
+            //3.一次性放入多个属性值。
+
+
+    function animate(ele,target){
+        //清除定时器
+        clearInterval(ele.timer);
+        ele.timer = setInterval(function () {
+            //四部：
+            //获取步长
+            var step = (target - ele.offsetLeft)/10;
+            //二次处理步长
+            step = step>0?Math.ceil(step):Math.floor(step);
+            //赋值
+            ele.style.left = ele.offsetLeft + step + "px";
+            //清除定时器
+            console.log(1);
+            if(Math.abs(target-ele.offsetLeft)<=Math.abs(step)){
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        },30);
+    }
+
+
+</script>
+
+</body>
+</html>

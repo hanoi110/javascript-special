@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1 {
+            margin: 0;
+            padding: 5px;
+            height: 300px;
+            background-color: #ddd;
+            position: relative;
+        }
+        button {
+            margin: 5px;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 40px;
+        }
+        .box3 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            left: 0;
+            top: 150px;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">
+    <button>运动到200</button>
+    <button>运动到400</button>
+    <div class="box2"></div>
+    <div class="box3"></div>
+</div>
+
+
+<script>
+
+    var btnArr = document.getElementsByTagName("button");
+    var box2 = document.getElementsByClassName("box2")[0];
+    var box3 = document.getElementsByClassName("box3")[0];
+
+    //绑定事件
+    btnArr[0].onclick = function () {
+        //如果有一天我们要传递另外一个盒子，那么我们的方法就不好用了
+        //所以我们要增加第二个参数，被移动的盒子本身。
+        animate(box2,200);
+        animate(box3,200);
+    }
+
+    btnArr[1].onclick = function () {
+        animate(box2,400);
+        animate(box3,400);
+    }
+
+
+    function animate(ele,target){
+        //要用定时器，先清除定时器
+        //一个盒子只能有一个定时器，这样儿的话，不会和其他盒子出现定时器冲突
+        //而定时器本身讲成为盒子的一个属性
+        clearInterval(ele.timer);
+        //我们要求盒子既能向前又能向后，那么我们的步长就得有正有负
+        //目标值如果大于当前值取正，目标值如果小于当前值取负
+        var speed = target>ele.offsetLeft?10:-10;
+        ele.timer = setInterval(function () {
+            //在执行之前就获取当前值和目标值之差
+            var val = target - ele.offsetLeft;
+            ele.style.left = ele.offsetLeft + speed + "px";
+            //目标值和当前值只差如果小于步长，那么就不能在前进了
+            //因为步长有正有负，所有转换成绝对值来比较
+            if(Math.abs(val)<Math.abs(speed)){
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        },30)
+    }
+
+
+</script>
+</body>
+</html>

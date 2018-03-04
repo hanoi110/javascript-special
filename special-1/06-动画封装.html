@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1 {
+            margin: 0;
+            padding: 5px;
+            height: 200px;
+            background-color: #ddd;
+            position: relative;
+        }
+        button {
+            margin: 5px;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box1">
+    <button>运动到200</button>
+    <button>运动到400</button>
+    <div class="box2"></div>
+</div>
+
+
+<script>
+
+    var btnArr = document.getElementsByTagName("button");
+    var box2 = document.getElementsByClassName("box2")[0];
+
+    var timer = null;
+
+    //绑定事件
+    btnArr[0].onclick = function () {
+//        timer = setInterval(function () {
+//            //盒子自身的位置+步长
+//            box2.style.left = box2.offsetLeft + 10 + "px";
+//            //如果停止盒子？清除定时器
+//            if(box2.offsetLeft === 200){
+//                clearInterval(timer);
+//            }
+//        },30);
+        animate(200);
+    }
+
+    btnArr[1].onclick = function () {
+//        timer = setInterval(function () {
+//            //盒子自身的位置+步长
+//            box2.style.left = box2.offsetLeft + 10 + "px";
+//            //如果停止盒子？清除定时器
+//            if(box2.offsetLeft === 400){
+//                clearInterval(timer);
+//            }
+//        },30);
+        animate(400);
+    }
+
+
+    function animate(target){
+        timer = setInterval(function () {
+            //盒子自身的位置+步长
+            box2.style.left = box2.offsetLeft + 10 + "px";
+            //如果停止盒子？清除定时器
+            if(box2.offsetLeft === target){
+//                clearInterval(timer);
+            }
+        },30);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+//    console.log(document.body.clientWidth);
+//    console.log(document.body.clientHeight);
+//
+//    console.log(document.documentElement.clientWidth);
+//    console.log(document.documentElement.clientHeight);
+//
+//
+//    document.write(window.innerWidth+"<br>");
+//    document.write(window.innerHeight);
+
+    //新事件：浏览器大小变化事件（浏览器哪怕大小变化1px也会触动这个事件）
+    window.onresize = function () {
+        document.title = client().width + "    "+ client().height;
+    }
+
+
+    //获取屏幕可视区域的宽高
+    function client(){
+        if(window.innerHeight !== undefined){
+            return {
+                "width": window.innerWidth,
+                "height": window.innerHeight
+            }
+        }else if(document.compatMode === "CSS1Compat"){
+            return {
+                "width": document.documentElement.clientWidth,
+                "height": document.documentElement.clientHeight
+            }
+        }else{
+            return {
+                "width": document.body.clientWidth,
+                "height": document.body.clientHeight
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

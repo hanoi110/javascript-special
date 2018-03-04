@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<button>运动到200</button>
+<button>运动到400</button>
+<div></div>
+
+<script>
+
+    var　btn = document.getElementsByTagName("button");
+    var　div = document.getElementsByTagName("div")[0];
+
+
+    btn[0].onclick = function () {
+        animate(div,200);
+    }
+
+    btn[1].onclick = function () {
+        animate(div,400);
+    }
+
+    //缓动动画封装
+    function animate(ele,target) {
+        //要用定时器，先清定时器
+        //一个萝卜一个坑儿，一个元素对应一个定时器
+        clearInterval(ele.timer);
+        //定义定时器
+        ele.timer = setInterval(function () {
+            //获取步长
+            //步长应该是越来越小的，缓动的算法。
+            var step = (target-ele.offsetLeft)/10;
+            //对步长进行二次加工(大于0向上取整,小于0项下取整)
+            step = step>0?Math.ceil(step):Math.floor(step);
+            //动画原理： 目标位置 = 当前位置 + 步长
+            ele.style.left = ele.offsetLeft + step + "px";
+            //检测缓动动画有没有停止
+            console.log(1);
+            if(Math.abs(target-ele.offsetLeft)<=Math.abs(step)){
+                //处理小数赋值
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        },30);
+    }
+
+
+</script>
+
+</body>
+</html>

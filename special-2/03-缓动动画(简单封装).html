@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            left: 400px;
+        }
+    </style>
+</head>
+<body>
+<button>运动到200</button>
+<button>运动到400</button>
+<div></div>
+
+<script>
+
+    var　btn = document.getElementsByTagName("button")[0];
+    var　div = document.getElementsByTagName("div")[0];
+
+    var timer = null;
+
+    btn.onclick = function () {
+        //要用定时器，先清定时器
+        clearInterval(timer);
+        timer = setInterval(function () {
+            var target = 0;
+            //缓动。如何缓动呢？步长越来越小....
+            //   步长用目标位置和盒子自身位置的十分之一
+            //最后10像素的时候都是1像素1像素的向目标位置移动，就能够到达指定位置。
+            var step = (target - div.offsetLeft)/10;
+            //每次获取步长都向上取整，这种情况就包含step<0.4的情况
+            //拓展：差值大于0的时候，向上取整，小于0的时候向下取整。
+//            step = Math.ceil(step);
+            step = step>0?Math.ceil(step):Math.floor(step);
+//            step = target>div.offsetLeft?Math.ceil(step):Math.floor(step);
+
+            //动画原理：盒子未来的位置 = 盒子当前的位置+步长
+            div.style.left = div.offsetLeft + step + "px";
+            //跳出条件：目标位置-当前位置的绝对值，小于步长
+            console.log(1);
+            if(Math.abs(0-div.offsetLeft)<Math.abs(step)){
+                div.style.left = 0+"px";
+                clearInterval(timer);
+            }
+        },30);
+    }
+
+
+</script>
+
+</body>
+</html>
